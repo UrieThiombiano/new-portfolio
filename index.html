@@ -215,6 +215,16 @@ section{padding:6rem 2.5rem;position:relative;z-index:1}
 .about-grid{
   display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;
 }
+.profile-photo-wrap{
+  display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;
+}
+.profile-photo{
+  width:80px;height:80px;border-radius:50%;
+  object-fit:cover;object-position:center top;
+  border:2px solid var(--accent);
+  filter:grayscale(15%);
+  flex-shrink:0;
+}
 .about-text p{
   color:var(--muted);line-height:1.85;margin-bottom:1.5rem;font-size:1.04rem;
 }
@@ -435,14 +445,27 @@ footer{
 .divider{width:48px;height:1px;background:var(--border2);margin:2rem 0}
 
 /* SCROLL INDICATOR */
+.hero-scroll-row{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+  margin-top:3rem;
+  animation:fadeUp 1s 0.7s ease both;
+}
 .scroll-ind{
-  position:absolute;bottom:2.5rem;left:2.5rem;
   display:flex;align-items:center;gap:0.75rem;
   font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
   color:var(--muted);
-  animation:fadeUp 1s 0.7s ease both;
 }
 .scroll-line{width:32px;height:1px;background:var(--muted)}
+.hero-contact-strip{
+  display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;
+}
+.hero-cinfo{
+  font-family:var(--mono);font-size:0.72rem;letter-spacing:0.06em;
+  color:var(--muted);text-decoration:none;
+  transition:color 0.2s;
+}
+.hero-cinfo:hover{color:var(--accent2)}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -469,8 +492,10 @@ footer{
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="https://github.com/UrieThiombiano" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/urie-thiombiano-abab3928a/" target="_blank" rel="noopener">LinkedIn</a></li>
   </ul>
-  <a href="mailto:urie@example.com" class="nav-cta">Get in touch</a>
+  <a href="mailto:urie.thiombiano@ensi-uma.tn" class="nav-cta">Get in touch</a>
 </nav>
 
 <!-- HERO -->
@@ -498,9 +523,16 @@ footer{
     <span class="tag">Low-resource NLP</span>
     <span class="tag">African Languages</span>
   </div>
-  <div class="scroll-ind">
-    <span class="scroll-line"></span>
-    Scroll to explore
+  <div class="hero-scroll-row">
+    <div class="scroll-ind">
+      <span class="scroll-line"></span>
+      Scroll to explore
+    </div>
+    <div class="hero-contact-strip">
+      <a href="mailto:urie.thiombiano@ensi-uma.tn" class="hero-cinfo">✉ urie.thiombiano@ensi-uma.tn</a>
+      <a href="https://wa.me/21651816269" class="hero-cinfo" target="_blank">💬 +216 51 81 62 69</a>
+      <a href="https://www.linkedin.com/in/urie-thiombiano-abab3928a/" class="hero-cinfo" target="_blank">in LinkedIn</a>
+    </div>
   </div>
 </section>
 
@@ -534,6 +566,19 @@ footer{
         <div class="section-header">
           <div class="section-eyebrow">About</div>
           <h2 class="section-title">Engineering AI systems. <em style="font-family:var(--serif);font-style:italic">Researching inclusion.</em></h2>
+        </div>
+        <div class="profile-photo-wrap">
+          <img
+            src="https://raw.githubusercontent.com/UrieThiombiano/new-portfolio/main/profile.jpeg"
+            alt="Urie Thiombiano"
+            class="profile-photo"
+            onerror="this.style.display='none'"
+          >
+          <div>
+            <div style="font-family:var(--serif);font-size:1.25rem;color:var(--text)">Urie Thiombiano</div>
+            <div style="font-family:var(--mono);font-size:0.75rem;color:var(--accent);letter-spacing:0.08em;margin-top:0.25rem">AI ENGINEER · RESEARCHER</div>
+            <div style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem">Burkina Faso / Tunisia</div>
+          </div>
         </div>
         <div class="about-text">
           <p>
@@ -955,10 +1000,15 @@ footer{
         and remote opportunities. I work with teams who care about real-world impact.
       </p>
       <div class="contact-links">
-        <a href="mailto:urie@example.com" class="clink">✉ Email</a>
-        <a href="https://github.com/UrieThiombiano" class="clink">⌥ GitHub</a>
-        <a href="https://linkedin.com" class="clink">in LinkedIn</a>
-        <a href="https://huggingface.co" class="clink">🤗 HuggingFace</a>
+        <a href="mailto:urie.thiombiano@ensi-uma.tn" class="clink">✉ Email</a>
+        <a href="https://wa.me/21651816269" class="clink" target="_blank" rel="noopener">💬 WhatsApp</a>
+        <a href="https://www.linkedin.com/in/urie-thiombiano-abab3928a/" class="clink" target="_blank" rel="noopener">in LinkedIn</a>
+        <a href="https://github.com/UrieThiombiano" class="clink" target="_blank" rel="noopener">⌥ GitHub</a>
+      </div>
+      <div style="margin-top:2rem;font-family:var(--mono);font-size:0.75rem;color:var(--muted);display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap">
+        <span>📧 urie.thiombiano@ensi-uma.tn</span>
+        <span>📱 +226 75 85 07 12</span>
+        <span>💬 WhatsApp +216 51 81 62 69</span>
       </div>
     </div>
   </div>
@@ -966,7 +1016,12 @@ footer{
 
 <footer>
   <span class="footer-note">© 2025 Urie Thiombiano — AI Engineer</span>
-  <span class="footer-note">Burkina Faso · Tunisia · Open to Remote</span>
+  <div style="display:flex;gap:1.5rem;flex-wrap:wrap">
+    <a href="mailto:urie.thiombiano@ensi-uma.tn" class="footer-note" style="text-decoration:none;color:var(--muted)">Email</a>
+    <a href="https://github.com/UrieThiombiano" class="footer-note" style="text-decoration:none;color:var(--muted)" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/urie-thiombiano-abab3928a/" class="footer-note" style="text-decoration:none;color:var(--muted)" target="_blank">LinkedIn</a>
+    <a href="https://wa.me/21651816269" class="footer-note" style="text-decoration:none;color:var(--muted)" target="_blank">WhatsApp</a>
+  </div>
 </footer>
 
 </body>
