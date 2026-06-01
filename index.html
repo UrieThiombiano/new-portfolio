@@ -1,861 +1,880 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Urie Thiombiano — AI Engineer</title>
+<title>Urie Thiombiano — Ingénieur IA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#080810;
-  --bg2:#0e0e1a;
-  --bg3:#13131f;
-  --surface:#1a1a2a;
-  --border:#ffffff12;
-  --border2:#ffffff20;
-  --text:#f0f0f8;
-  --muted:#8888a8;
-  --accent:#6C63FF;
-  --accent2:#a78bfa;
-  --amber:#f59e0b;
-  --teal:#14b8a6;
-  --green:#22c55e;
-  --red:#ef4444;
-  --mono:'DM Mono',monospace;
-  --sans:'Outfit',sans-serif;
-  --serif:'DM Serif Display',serif;
+  --bg:#f4f2ee;
+  --bg2:#ede9e2;
+  --white:#ffffff;
+  --card:#faf9f7;
+  --border:#e2ddd6;
+  --text:#1a1a1a;
+  --muted:#666;
+  --light:#999;
+  --accent:#c1440e;
+  --accent-light:#f5e6df;
+  --accent-hover:#a8380b;
+  --serif:'Playfair Display',serif;
+  --sans:'Inter',sans-serif;
 }
 html{scroll-behavior:smooth}
 body{
   background:var(--bg);
   color:var(--text);
   font-family:var(--sans);
-  font-size:16px;
+  font-size:15px;
   line-height:1.6;
   overflow-x:hidden;
 }
 
-/* NAV */
+/* ── NAV ── */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
+  position:sticky;top:0;z-index:100;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  padding:0 3rem;
   display:flex;align-items:center;justify-content:space-between;
-  padding:1.1rem 2.5rem;
-  background:rgba(8,8,16,0.85);
-  backdrop-filter:blur(20px);
-  border-bottom:0.5px solid var(--border);
+  height:60px;
 }
-.nav-logo{
-  font-family:var(--mono);
-  font-size:0.9rem;
-  letter-spacing:0.05em;
-  color:var(--accent2);
+.nav-name{
+  font-family:var(--serif);font-size:1.1rem;font-weight:700;
+  color:var(--text);text-decoration:none;
 }
-.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links{display:flex;align-items:center;gap:0.25rem;list-style:none}
 .nav-links a{
-  font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;
-  color:var(--muted);text-decoration:none;
-  transition:color 0.2s;
+  font-size:0.85rem;color:var(--muted);text-decoration:none;
+  padding:0.4rem 0.8rem;border-radius:6px;
+  transition:color 0.2s,background 0.2s;
 }
-.nav-links a:hover{color:var(--text)}
-.nav-cta{
-  font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;
-  padding:0.5rem 1.2rem;
-  border:0.5px solid var(--border2);
-  border-radius:4px;
-  color:var(--text);
-  text-decoration:none;
-  transition:background 0.2s,border-color 0.2s;
-  background:transparent;
+.nav-links a:hover{color:var(--text);background:var(--bg2)}
+.nav-right{display:flex;align-items:center;gap:0.75rem}
+.lang-toggle{
+  display:flex;align-items:center;
+  background:var(--bg2);border-radius:20px;
+  padding:2px;border:1px solid var(--border);
+  font-size:0.78rem;font-family:var(--sans);
 }
-.nav-cta:hover{background:var(--surface);border-color:var(--accent)}
-
-/* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:8rem 2.5rem 4rem;
-  max-width:1100px;margin:0 auto;
-  position:relative;
+.lang-btn{
+  padding:0.3rem 0.75rem;border-radius:18px;
+  border:none;background:transparent;cursor:pointer;
+  font-size:0.78rem;font-weight:500;color:var(--muted);
+  transition:all 0.2s;font-family:var(--sans);
 }
-.hero-label{
-  font-family:var(--mono);
-  font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:1.8rem;
-  display:flex;align-items:center;gap:0.75rem;
-}
-.hero-label::before{
-  content:'';display:inline-block;
-  width:28px;height:1px;background:var(--accent);
-}
-.hero-name{
-  font-family:var(--serif);
-  font-size:clamp(3.2rem,7vw,6.5rem);
-  line-height:1.04;
-  letter-spacing:-0.02em;
-  margin-bottom:1.4rem;
-  background:linear-gradient(135deg,var(--text) 40%,var(--accent2) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.hero-name em{font-style:italic;color:var(--accent2)}
-.hero-desc{
-  font-size:1.18rem;
-  color:var(--muted);
-  max-width:600px;
-  line-height:1.75;
-  margin-bottom:3rem;
-}
-.hero-desc strong{color:var(--text);font-weight:500}
-.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-primary{
-  padding:0.85rem 2rem;
-  background:var(--accent);
-  color:#fff;
-  border:none;border-radius:4px;
-  font-family:var(--sans);font-size:0.88rem;
-  font-weight:500;letter-spacing:0.04em;text-transform:uppercase;
+.lang-btn.active{background:var(--white);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.btn-contact{
+  padding:0.45rem 1.1rem;
+  background:var(--text);color:var(--white);
+  border:none;border-radius:8px;
+  font-size:0.82rem;font-weight:500;
   text-decoration:none;cursor:pointer;
-  transition:opacity 0.2s,transform 0.15s;
+  transition:background 0.2s;font-family:var(--sans);
 }
-.btn-primary:hover{opacity:0.88;transform:translateY(-1px)}
-.btn-ghost{
-  padding:0.85rem 2rem;
-  background:transparent;
-  color:var(--muted);
-  border:0.5px solid var(--border2);
-  border-radius:4px;
-  font-family:var(--sans);font-size:0.88rem;
-  font-weight:400;letter-spacing:0.04em;text-transform:uppercase;
-  text-decoration:none;cursor:pointer;
-  transition:color 0.2s,border-color 0.2s;
-}
-.btn-ghost:hover{color:var(--text);border-color:var(--accent2)}
+.btn-contact:hover{background:#333}
 
-.hero-tags{
-  display:flex;flex-wrap:wrap;gap:0.6rem;
-  margin-top:3.5rem;
-}
-.tag{
-  font-family:var(--mono);
-  font-size:0.73rem;letter-spacing:0.08em;
-  padding:0.3rem 0.9rem;
-  border:0.5px solid var(--border2);
-  border-radius:2px;
-  color:var(--muted);
-  background:var(--bg2);
-}
-.tag.active{border-color:var(--accent);color:var(--accent2);background:rgba(108,99,255,0.08)}
-
-/* AMBIENT GLOW */
-.glow{
-  position:fixed;top:-20%;right:-10%;
-  width:700px;height:700px;
-  background:radial-gradient(ellipse,rgba(108,99,255,0.09) 0%,transparent 65%);
-  pointer-events:none;z-index:0;
-}
-.glow2{
-  position:fixed;bottom:-20%;left:-5%;
-  width:500px;height:500px;
-  background:radial-gradient(ellipse,rgba(20,184,166,0.06) 0%,transparent 65%);
-  pointer-events:none;z-index:0;
-}
-
-/* STAT STRIP */
-.stat-strip{
-  border-top:0.5px solid var(--border);
-  border-bottom:0.5px solid var(--border);
-  background:var(--bg2);
-  padding:2rem 2.5rem;
-}
-.stat-strip-inner{
+/* ── LAYOUT ── */
+.main-layout{
   max-width:1100px;margin:0 auto;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;
-}
-.stat{text-align:center}
-.stat-num{
-  font-family:var(--serif);
-  font-size:2.4rem;line-height:1;
-  color:var(--text);
-  margin-bottom:0.4rem;
-}
-.stat-label{
-  font-family:var(--mono);
-  font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--muted);
+  padding:2.5rem 2rem;
 }
 
-/* SECTION SHARED */
-section{padding:6rem 2.5rem;position:relative;z-index:1}
-.section-inner{max-width:1100px;margin:0 auto}
-.section-header{margin-bottom:4rem}
-.section-eyebrow{
-  font-family:var(--mono);
-  font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:1rem;
-  display:flex;align-items:center;gap:0.75rem;
-}
-.section-eyebrow::before{content:'';width:20px;height:1px;background:var(--accent)}
-.section-title{
-  font-family:var(--serif);
-  font-size:clamp(2rem,4vw,3.2rem);
-  line-height:1.1;
-  color:var(--text);
-}
-.section-sub{
-  margin-top:1rem;
-  color:var(--muted);
-  font-size:1.05rem;
-  max-width:540px;
+/* ── HERO SECTION ── */
+.hero-section{
+  display:grid;grid-template-columns:300px 1fr;gap:3.5rem;
+  align-items:start;margin-bottom:5rem;
 }
 
-/* ABOUT */
-.about-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;
+/* Profile Card */
+.profile-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:2rem 1.5rem;
+  text-align:center;
+  position:sticky;top:80px;
 }
 .profile-photo-wrap{
-  display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;
+  position:relative;
+  width:180px;height:180px;
+  margin:0 auto 1.25rem;
+}
+.profile-bg-circle{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:160px;height:160px;
+  background:linear-gradient(135deg,#f5d5aa 0%,#e8c9a8 100%);
+  border-radius:50%;
+}
+.profile-bg-shape{
+  position:absolute;top:5px;right:5px;
+  width:55px;height:55px;
+  background:#e8ddd4;border-radius:50%;opacity:0.7;
 }
 .profile-photo{
-  width:80px;height:80px;border-radius:50%;
+  position:relative;z-index:1;
+  width:160px;height:160px;
+  border-radius:50%;
   object-fit:cover;object-position:center top;
-  border:2px solid var(--accent);
-  filter:grayscale(15%);
-  flex-shrink:0;
+  display:block;margin:10px auto 0;
 }
-.about-text p{
-  color:var(--muted);line-height:1.85;margin-bottom:1.5rem;font-size:1.04rem;
+.profile-photo-placeholder{
+  position:relative;z-index:1;
+  width:160px;height:160px;border-radius:50%;
+  background:linear-gradient(135deg,#d4b896,#c9a87a);
+  display:flex;align-items:center;justify-content:center;
+  margin:10px auto 0;
+  font-family:var(--serif);font-size:3rem;color:#fff;
 }
-.about-text p strong{color:var(--text);font-weight:500}
-.about-pills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:2rem}
-.pill{
-  font-size:0.8rem;padding:0.35rem 0.9rem;
-  border:0.5px solid var(--border2);border-radius:20px;
-  color:var(--muted);background:var(--bg2);
+.profile-name{
+  font-family:var(--serif);font-size:1.15rem;font-weight:700;
+  color:var(--text);margin-bottom:0.3rem;
 }
-.about-card{
-  background:var(--bg3);
-  border:0.5px solid var(--border);
-  border-radius:8px;
-  padding:2rem;
+.profile-title{
+  font-size:0.72rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--accent);
+  margin-bottom:1.25rem;
 }
-.about-card-item{
-  display:flex;gap:1rem;align-items:flex-start;
-  padding:1.2rem 0;
-  border-bottom:0.5px solid var(--border);
+.profile-links{
+  display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;
+  margin-bottom:0;
 }
-.about-card-item:last-child{border-bottom:none}
-.aci-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--accent);margin-top:0.5rem;flex-shrink:0;
+.plink{
+  display:flex;align-items:center;gap:0.35rem;
+  padding:0.35rem 0.8rem;
+  border:1px solid var(--border);border-radius:6px;
+  font-size:0.78rem;color:var(--muted);text-decoration:none;
+  background:var(--white);
+  transition:border-color 0.2s,color 0.2s;
 }
-.aci-label{font-size:0.82rem;color:var(--muted);font-family:var(--mono)}
-.aci-val{font-size:0.95rem;color:var(--text);font-weight:500}
+.plink:hover{border-color:var(--accent);color:var(--accent)}
+.plink svg{width:13px;height:13px;flex-shrink:0}
 
-/* RESEARCH */
-.research-block{
-  background:var(--bg2);
-  border:0.5px solid var(--border);
-  border-radius:8px;
-  padding:2.5rem;
-  margin-bottom:1.5rem;
+/* Hero Content */
+.hero-content{}
+.hero-name{
+  font-family:var(--serif);
+  font-size:clamp(2.4rem,4.5vw,3.8rem);
+  font-weight:700;line-height:1.1;
+  color:var(--text);margin-bottom:1.5rem;
+}
+.hero-bio{
+  font-size:0.98rem;color:var(--muted);
+  line-height:1.85;margin-bottom:1rem;
+  max-width:640px;
+}
+.hero-bio strong{color:var(--text);font-weight:600}
+.hero-tags{
+  display:flex;flex-wrap:wrap;gap:0.5rem;
+  margin:1.5rem 0 2rem;
+}
+.tag{
+  padding:0.35rem 0.9rem;
+  border:1px solid var(--border);border-radius:20px;
+  font-size:0.8rem;color:var(--muted);
+  background:var(--white);
+  transition:border-color 0.2s,color 0.2s;
+}
+.tag.accent{
+  border-color:var(--accent);color:var(--accent);
+  background:var(--accent-light);
+}
+.hero-actions{display:flex;gap:0.75rem;flex-wrap:wrap}
+.btn-primary{
+  padding:0.7rem 1.6rem;
+  background:var(--accent);color:var(--white);
+  border:none;border-radius:8px;
+  font-size:0.87rem;font-weight:500;
+  text-decoration:none;cursor:pointer;
+  transition:background 0.2s,transform 0.15s;
+  font-family:var(--sans);
+}
+.btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px)}
+.btn-outline{
+  padding:0.7rem 1.6rem;
+  background:var(--white);color:var(--text);
+  border:1px solid var(--border);border-radius:8px;
+  font-size:0.87rem;font-weight:400;
+  text-decoration:none;cursor:pointer;
+  transition:border-color 0.2s,color 0.2s;
+  font-family:var(--sans);
+}
+.btn-outline:hover{border-color:var(--text);color:var(--text)}
+
+/* ── STAT STRIP ── */
+.stat-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  margin-bottom:5rem;
+}
+.stat-item{
+  background:var(--card);padding:1.5rem;text-align:center;
+}
+.stat-num{
+  font-family:var(--serif);font-size:2rem;font-weight:700;
+  color:var(--text);line-height:1;margin-bottom:0.4rem;
+}
+.stat-label{
+  font-size:0.75rem;color:var(--muted);
+  text-transform:uppercase;letter-spacing:0.08em;
+}
+
+/* ── SECTIONS SHARED ── */
+.section{padding:4rem 0;border-top:1px solid var(--border)}
+.section-eyebrow{
+  font-size:0.72rem;font-weight:600;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--accent);
+  margin-bottom:0.6rem;
+}
+.section-title{
+  font-family:var(--serif);
+  font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:700;color:var(--text);
+  line-height:1.15;margin-bottom:0.75rem;
+}
+.section-sub{
+  font-size:0.95rem;color:var(--muted);
+  max-width:580px;line-height:1.7;margin-bottom:2.5rem;
+}
+
+/* ── ABOUT DETAIL ── */
+.about-detail-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;
+  align-items:start;
+}
+.about-facts{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:1.75rem;
+}
+.fact-item{
+  display:flex;gap:1rem;align-items:flex-start;
+  padding:0.9rem 0;border-bottom:1px solid var(--border);
+}
+.fact-item:first-child{padding-top:0}
+.fact-item:last-child{border-bottom:none;padding-bottom:0}
+.fact-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--accent);flex-shrink:0;margin-top:0.45rem;
+}
+.fact-label{font-size:0.75rem;color:var(--light);font-family:var(--sans);margin-bottom:0.15rem}
+.fact-val{font-size:0.9rem;color:var(--text);font-weight:500}
+
+/* ── RESEARCH ── */
+.research-main{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:2rem;margin-bottom:1.25rem;
   position:relative;overflow:hidden;
 }
-.research-block::before{
-  content:'';position:absolute;top:0;left:0;right:0;
-  height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--teal));
+.research-main::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),#e88a5a);
+}
+.research-type{
+  font-size:0.72rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;
 }
 .research-title{
-  font-family:var(--serif);font-size:1.6rem;
-  color:var(--text);margin-bottom:1rem;
+  font-family:var(--serif);font-size:1.3rem;font-weight:700;
+  color:var(--text);margin-bottom:0.5rem;
 }
 .research-meta{
-  display:flex;gap:1.5rem;flex-wrap:wrap;
-  margin-bottom:1.5rem;
+  display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;
 }
-.rmeta{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)}
-.research-desc{color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
-.research-langs{display:flex;gap:0.5rem;flex-wrap:wrap}
-.lang-chip{
-  font-family:var(--mono);font-size:0.72rem;
-  padding:0.2rem 0.7rem;
-  border:0.5px solid var(--teal);
-  color:var(--teal);border-radius:2px;background:rgba(20,184,166,0.06)
+.rmeta{
+  font-size:0.78rem;color:var(--muted);
+  display:flex;align-items:center;gap:0.3rem;
 }
-.research-models{display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap}
-.model-chip{
-  font-family:var(--mono);font-size:0.72rem;
-  padding:0.2rem 0.7rem;
-  border:0.5px solid var(--accent);
-  color:var(--accent2);border-radius:2px;background:rgba(108,99,255,0.06)
+.research-desc{font-size:0.91rem;color:var(--muted);line-height:1.75;margin-bottom:1.25rem}
+.chip-group{margin-bottom:0.75rem}
+.chip-label{font-size:0.72rem;color:var(--light);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem}
+.chips{display:flex;flex-wrap:wrap;gap:0.4rem}
+.chip{
+  font-size:0.75rem;padding:0.2rem 0.65rem;
+  border-radius:4px;border:1px solid;
 }
+.chip-teal{border-color:#0d9488;color:#0d9488;background:rgba(13,148,136,0.06)}
+.chip-purple{border-color:#7c3aed;color:#7c3aed;background:rgba(124,58,237,0.06)}
+.research-sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.research-sub{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:1.5rem;
+}
+.rsub-type{
+  font-size:0.7rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;margin-bottom:0.6rem;
+}
+.rsub-type.teal{color:#0d9488}
+.rsub-type.amber{color:#d97706}
+.rsub-title{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.5rem}
+.rsub-desc{font-size:0.85rem;color:var(--muted);line-height:1.65}
 
-/* PROJECTS */
+/* ── PROJECTS ── */
 .projects-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;
 }
 .project-card{
-  background:var(--bg2);
-  border:0.5px solid var(--border);
-  border-radius:8px;
-  padding:2rem;
-  text-decoration:none;color:inherit;
-  transition:border-color 0.25s,transform 0.2s;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:1.75rem;
   display:flex;flex-direction:column;
-  position:relative;overflow:hidden;
-  cursor:pointer;
+  transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;
+  cursor:pointer;position:relative;
 }
-.project-card:hover{border-color:var(--accent);transform:translateY(-3px)}
-.project-card.featured{
-  grid-column:span 2;
+.project-card:hover{
+  border-color:var(--accent);transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(0,0,0,0.08);
 }
-.project-tag{
-  font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:1rem;
+.project-card.featured{grid-column:span 2}
+.project-type{
+  font-size:0.7rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;
 }
 .project-title{
-  font-family:var(--serif);font-size:1.4rem;
-  color:var(--text);margin-bottom:0.75rem;
-  line-height:1.2;
+  font-family:var(--serif);font-size:1.2rem;font-weight:700;
+  color:var(--text);margin-bottom:0.5rem;line-height:1.25;
+}
+.project-impact{
+  font-size:0.8rem;color:#16a34a;margin-bottom:0.6rem;
+  display:flex;align-items:center;gap:0.3rem;
 }
 .project-desc{
-  color:var(--muted);font-size:0.92rem;line-height:1.7;
-  flex:1;margin-bottom:1.5rem;
+  font-size:0.87rem;color:var(--muted);line-height:1.7;
+  flex:1;margin-bottom:1.25rem;
 }
-.project-stack{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:auto}
+.project-stack{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:auto}
 .stack-badge{
-  font-family:var(--mono);font-size:0.68rem;
-  padding:0.2rem 0.55rem;
-  background:var(--bg3);border:0.5px solid var(--border2);
-  border-radius:2px;color:var(--muted);
+  font-size:0.72rem;padding:0.2rem 0.55rem;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:4px;color:var(--muted);
 }
 .project-arrow{
-  position:absolute;top:1.5rem;right:1.5rem;
-  font-size:1rem;color:var(--border2);
+  position:absolute;top:1.25rem;right:1.25rem;
+  font-size:1rem;color:var(--border);
   transition:color 0.2s,transform 0.2s;
 }
-.project-card:hover .project-arrow{color:var(--accent);transform:translate(3px,-3px)}
-.project-impact{
-  display:flex;align-items:center;gap:0.5rem;
-  margin-bottom:1rem;
-  font-size:0.8rem;color:var(--green);
-  font-family:var(--mono);
-}
-.project-impact::before{content:'↗';font-size:0.9rem}
+.project-card:hover .project-arrow{color:var(--accent);transform:translate(2px,-2px)}
 
-/* SKILLS */
-.skills-section{background:var(--bg2)}
+/* ── SKILLS ── */
 .skills-grid{
   display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-  border:0.5px solid var(--border);border-radius:8px;overflow:hidden;
+  background:var(--border);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
 }
-.skill-group{
-  background:var(--bg3);padding:2rem 1.5rem;
-  border-right:0.5px solid var(--border);
-}
-.skill-group:last-child{border-right:none}
+.skill-group{background:var(--card);padding:1.75rem 1.5rem}
 .sg-title{
-  font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:1.2rem;
+  font-size:0.72rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:1rem;
 }
-.sg-items{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
-.sg-items li{font-size:0.88rem;color:var(--muted);padding-left:0.75rem;position:relative}
-.sg-items li::before{content:'—';position:absolute;left:0;color:var(--border2)}
+.sg-items{list-style:none;display:flex;flex-direction:column;gap:0.45rem}
+.sg-items li{font-size:0.86rem;color:var(--muted);padding-left:0.9rem;position:relative}
+.sg-items li::before{content:'–';position:absolute;left:0;color:var(--border)}
 
-/* TIMELINE */
-.timeline{position:relative;padding-left:2rem}
+/* ── TIMELINE ── */
+.timeline{padding-left:1.5rem;position:relative}
 .timeline::before{
   content:'';position:absolute;left:0;top:0;bottom:0;
   width:1px;background:var(--border);
 }
-.tl-item{
-  position:relative;padding:0 0 3rem 2.5rem;
-}
+.tl-item{padding:0 0 2.5rem 2rem;position:relative}
 .tl-item:last-child{padding-bottom:0}
 .tl-dot{
-  position:absolute;left:-2rem;top:0.4rem;
+  position:absolute;left:-1.5rem;top:0.35rem;
   width:8px;height:8px;border-radius:50%;
   background:var(--accent);
-  box-shadow:0 0 0 4px rgba(108,99,255,0.15);
+  box-shadow:0 0 0 3px var(--accent-light);
 }
+.tl-dot.gold{background:#d97706;box-shadow:0 0 0 3px #fef3c7}
 .tl-year{
-  font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:0.5rem;
+  font-size:0.72rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem;
 }
-.tl-title{font-family:var(--serif);font-size:1.25rem;color:var(--text);margin-bottom:0.25rem}
-.tl-place{font-size:0.88rem;color:var(--muted);margin-bottom:0.75rem;font-style:italic}
-.tl-desc{font-size:0.92rem;color:var(--muted);line-height:1.7}
+.tl-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:0.2rem}
+.tl-place{font-size:0.85rem;color:var(--muted);font-style:italic;margin-bottom:0.5rem}
+.tl-desc{font-size:0.88rem;color:var(--light);line-height:1.65}
 
-/* AWARDS */
-.awards-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
-}
+/* ── AWARDS ── */
+.awards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
 .award-card{
-  background:var(--bg2);border:0.5px solid var(--border);
-  border-radius:8px;padding:1.75rem;
-  display:flex;flex-direction:column;gap:0.75rem;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:1.5rem;
+  display:flex;flex-direction:column;gap:0.5rem;
 }
-.award-icon{font-size:1.5rem;margin-bottom:0.25rem}
-.award-title{font-size:0.98rem;font-weight:500;color:var(--text)}
-.award-source{font-family:var(--mono);font-size:0.72rem;color:var(--accent);letter-spacing:0.08em}
-.award-year{font-family:var(--mono);font-size:0.72rem;color:var(--muted)}
+.award-icon{font-size:1.4rem}
+.award-title{font-size:0.93rem;font-weight:600;color:var(--text)}
+.award-source{font-size:0.75rem;color:var(--accent);font-weight:500}
+.award-year{font-size:0.75rem;color:var(--light)}
 
-/* CONTACT */
-.contact-section{background:var(--bg2)}
-.contact-inner{
-  max-width:700px;margin:0 auto;text-align:center;
+/* ── CONTACT ── */
+.contact-section{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:3.5rem;
+  text-align:center;margin-top:5rem;margin-bottom:3rem;
 }
 .contact-title{
-  font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);
-  color:var(--text);margin-bottom:1.5rem;
+  font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);
+  font-weight:700;color:var(--text);margin-bottom:1rem;
 }
-.contact-desc{color:var(--muted);font-size:1.05rem;line-height:1.8;margin-bottom:3rem}
-.contact-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.contact-desc{
+  font-size:0.97rem;color:var(--muted);
+  max-width:520px;margin:0 auto 2rem;line-height:1.75;
+}
+.contact-links{display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
 .clink{
-  display:flex;align-items:center;gap:0.5rem;
-  text-decoration:none;color:var(--muted);
-  font-size:0.88rem;font-family:var(--mono);
-  padding:0.7rem 1.4rem;
-  border:0.5px solid var(--border2);border-radius:4px;
-  transition:color 0.2s,border-color 0.2s;
+  display:flex;align-items:center;gap:0.4rem;
+  padding:0.6rem 1.3rem;
+  border:1px solid var(--border);border-radius:8px;
+  font-size:0.85rem;color:var(--muted);text-decoration:none;
+  background:var(--white);
+  transition:border-color 0.2s,color 0.2s;
 }
-.clink:hover{color:var(--text);border-color:var(--accent)}
+.clink:hover{border-color:var(--accent);color:var(--accent)}
+.contact-info{
+  font-size:0.78rem;color:var(--light);
+  display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
+}
 
-/* FOOTER */
+/* ── FOOTER ── */
 footer{
-  border-top:0.5px solid var(--border);
-  padding:2rem 2.5rem;
-  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--border);
+  padding:1.5rem 2rem;
   max-width:1100px;margin:0 auto;
-}
-.footer-note{font-family:var(--mono);font-size:0.72rem;color:var(--muted);letter-spacing:0.06em}
-
-/* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-.hero-label{animation:fadeUp 0.6s ease both}
-.hero-name{animation:fadeUp 0.7s 0.1s ease both}
-.hero-desc{animation:fadeUp 0.7s 0.2s ease both}
-.hero-actions{animation:fadeUp 0.7s 0.3s ease both}
-.hero-tags{animation:fadeUp 0.7s 0.4s ease both}
-
-/* DIVIDER */
-.divider{width:48px;height:1px;background:var(--border2);margin:2rem 0}
-
-/* SCROLL INDICATOR */
-.hero-scroll-row{
   display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:1rem;
-  margin-top:3rem;
-  animation:fadeUp 1s 0.7s ease both;
 }
-.scroll-ind{
-  display:flex;align-items:center;gap:0.75rem;
-  font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--muted);
-}
-.scroll-line{width:32px;height:1px;background:var(--muted)}
-.hero-contact-strip{
-  display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;
-}
-.hero-cinfo{
-  font-family:var(--mono);font-size:0.72rem;letter-spacing:0.06em;
-  color:var(--muted);text-decoration:none;
-  transition:color 0.2s;
-}
-.hero-cinfo:hover{color:var(--accent2)}
+.footer-note{font-size:0.78rem;color:var(--light)}
+.footer-links{display:flex;gap:1.25rem}
+.footer-links a{font-size:0.78rem;color:var(--light);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--accent)}
 
-/* RESPONSIVE */
+/* ── RESPONSIVE ── */
 @media(max-width:900px){
-  .about-grid,.projects-grid,.awards-grid,.skills-grid{grid-template-columns:1fr}
+  .hero-section{grid-template-columns:1fr}
+  .profile-card{position:static;width:280px;margin:0 auto}
+  .about-detail-grid,.research-sub-grid,.projects-grid,.awards-grid,.skills-grid{grid-template-columns:1fr}
   .project-card.featured{grid-column:span 1}
-  .stat-strip-inner{grid-template-columns:repeat(2,1fr)}
-  nav{padding:1rem 1.25rem}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  nav{padding:0 1.25rem}
   .nav-links{display:none}
-  section{padding:4rem 1.25rem}
-  .hero{padding:7rem 1.25rem 3rem}
+  .main-layout{padding:1.5rem 1.25rem}
+  .contact-section{padding:2rem 1.5rem}
 }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-content>*{animation:fadeUp 0.5s ease both}
+.hero-content>*:nth-child(1){animation-delay:0.05s}
+.hero-content>*:nth-child(2){animation-delay:0.1s}
+.hero-content>*:nth-child(3){animation-delay:0.15s}
+.hero-content>*:nth-child(4){animation-delay:0.2s}
+.hero-content>*:nth-child(5){animation-delay:0.25s}
+.profile-card{animation:fadeUp 0.5s 0.1s ease both}
+
+/* ── LANG VISIBILITY ── */
+[data-fr],[data-en]{transition:opacity 0.2s}
+body.en [data-fr]{display:none}
+body.fr [data-en]{display:none}
 </style>
 </head>
-<body>
-<div class="glow"></div>
-<div class="glow2"></div>
+<body class="fr">
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">UT_</span>
+  <a href="#" class="nav-name">Urie Thiombiano</a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about" data-fr>À propos</a><a href="#about" data-en>About</a></li>
+    <li><a href="#research" data-fr>Recherche</a><a href="#research" data-en>Research</a></li>
+    <li><a href="#projects" data-fr>Projets</a><a href="#projects" data-en>Projects</a></li>
+    <li><a href="#background" data-fr>Parcours</a><a href="#background" data-en>Background</a></li>
+    <li><a href="#awards" data-fr>Distinctions</a><a href="#awards" data-en>Awards</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="https://github.com/UrieThiombiano" target="_blank" rel="noopener">GitHub</a></li>
-    <li><a href="https://www.linkedin.com/in/urie-thiombiano-abab3928a/" target="_blank" rel="noopener">LinkedIn</a></li>
   </ul>
-  <a href="mailto:urie.thiombiano@ensi-uma.tn" class="nav-cta">Get in touch</a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="mailto:urie.thiombiano@ensi-uma.tn" class="btn-contact" data-fr>Me contacter</a>
+    <a href="mailto:urie.thiombiano@ensi-uma.tn" class="btn-contact" data-en>Get in touch</a>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-label">AI Engineer · Applied Research · African NLP</div>
-  <h1 class="hero-name">Urie<br>Thiombiano<em>.</em></h1>
-  <p class="hero-desc">
-    I design, build and deploy <strong>AI systems</strong> that solve real problems —
-    from <strong>intelligent automation</strong> and production backends
-    to <strong>low-resource NLP research</strong> for African languages.
-    Based in Burkina Faso / Tunisia. Building for global impact.
-  </p>
-  <div class="hero-actions">
-    <a href="#projects" class="btn-primary">View Projects</a>
-    <a href="#research" class="btn-ghost">Research Work</a>
-  </div>
-  <div class="hero-tags">
-    <span class="tag active">Applied AI</span>
-    <span class="tag">NLP Research</span>
-    <span class="tag">AI Systems</span>
-    <span class="tag">Python · PyTorch</span>
-    <span class="tag">Transformers</span>
-    <span class="tag">FastAPI</span>
-    <span class="tag">React Native</span>
-    <span class="tag">Low-resource NLP</span>
-    <span class="tag">African Languages</span>
-  </div>
-  <div class="hero-scroll-row">
-    <div class="scroll-ind">
-      <span class="scroll-line"></span>
-      Scroll to explore
-    </div>
-    <div class="hero-contact-strip">
-      <a href="mailto:urie.thiombiano@ensi-uma.tn" class="hero-cinfo">✉ urie.thiombiano@ensi-uma.tn</a>
-      <a href="https://wa.me/21651816269" class="hero-cinfo" target="_blank">💬 +216 51 81 62 69</a>
-      <a href="https://www.linkedin.com/in/urie-thiombiano-abab3928a/" class="hero-cinfo" target="_blank">in LinkedIn</a>
-    </div>
-  </div>
-</section>
+<div class="main-layout">
 
-<!-- STAT STRIP -->
-<div class="stat-strip">
-  <div class="stat-strip-inner">
-    <div class="stat">
-      <div class="stat-num">6+</div>
-      <div class="stat-label">Production Projects</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">4</div>
-      <div class="stat-label">African Languages Researched</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">2×</div>
-      <div class="stat-label">Presidential Excellence Awards</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">2</div>
-      <div class="stat-label">Engineering Degrees</div>
-    </div>
-  </div>
-</div>
+  <!-- ── HERO ── -->
+  <section id="about" style="padding-top:2rem">
+    <div class="hero-section">
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div>
-        <div class="section-header">
-          <div class="section-eyebrow">About</div>
-          <h2 class="section-title">Engineering AI systems. <em style="font-family:var(--serif);font-style:italic">Researching inclusion.</em></h2>
-        </div>
+      <!-- Profile Card -->
+      <div class="profile-card">
         <div class="profile-photo-wrap">
+          <div class="profile-bg-circle"></div>
+          <div class="profile-bg-shape"></div>
           <img
             src="https://raw.githubusercontent.com/UrieThiombiano/new-portfolio/main/profile.jpeg"
             alt="Urie Thiombiano"
             class="profile-photo"
-            onerror="this.style.display='none'"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
           >
-          <div>
-            <div style="font-family:var(--serif);font-size:1.25rem;color:var(--text)">Urie Thiombiano</div>
-            <div style="font-family:var(--mono);font-size:0.75rem;color:var(--accent);letter-spacing:0.08em;margin-top:0.25rem">AI ENGINEER · RESEARCHER</div>
-            <div style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem">Burkina Faso / Tunisia</div>
-          </div>
+          <div class="profile-photo-placeholder" style="display:none">UT</div>
         </div>
-        <div class="about-text">
-          <p>
-            I'm a Computer Science Engineering student specializing in AI at <strong>ENSI, Tunisia</strong>,
-            simultaneously pursuing a <strong>Master in Data Science</strong>. My work spans the full stack of
-            AI — from training transformer models to shipping production APIs and mobile apps.
-          </p>
-          <p>
-            What sets me apart is a dual focus: <strong>engineering execution</strong> (I build things that work)
-            and <strong>applied research</strong> (I work on NLP for African languages that are largely
-            absent from modern AI systems).
-          </p>
-          <p>
-            I grew up speaking <strong>Mooré and Gourmantchéma</strong>. My research is not just technical —
-            it's personal. I'm building the infrastructure for languages like mine to exist in the age of AI.
-          </p>
-        </div>
-        <div class="about-pills">
-          <span class="pill">AI Engineering</span>
-          <span class="pill">Applied Research</span>
-          <span class="pill">Product Thinking</span>
-          <span class="pill">Responsible AI</span>
-          <span class="pill">African NLP</span>
+        <div class="profile-name">Urie Thiombiano</div>
+        <div class="profile-title" data-fr>Ingénieur IA · Chercheur</div>
+        <div class="profile-title" data-en>AI Engineer · Researcher</div>
+        <div class="profile-links">
+          <a href="mailto:urie.thiombiano@ensi-uma.tn" class="plink">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+            Email
+          </a>
+          <a href="https://www.linkedin.com/in/urie-thiombiano-abab3928a/" class="plink" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/UrieThiombiano" class="plink" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            GitHub
+          </a>
+          <a href="https://wa.me/21651816269" class="plink" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.531 5.851L.061 23.203a.75.75 0 00.921.921l5.352-1.47A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.75 9.75 0 01-4.964-1.36l-.357-.211-3.696 1.016 1.016-3.696-.211-.357A9.75 9.75 0 0112 2.25 9.75 9.75 0 0121.75 12 9.75 9.75 0 0112 21.75z"/></svg>
+            WhatsApp
+          </a>
         </div>
       </div>
-      <div class="about-card">
-        <div class="about-card-item">
-          <div class="aci-dot"></div>
+
+      <!-- Hero Content -->
+      <div class="hero-content">
+        <h1 class="hero-name">Urie Thiombiano</h1>
+        <p class="hero-bio" data-fr>
+          Je suis étudiant en <strong>Génie Informatique spécialisation IA</strong> à l'<strong>ENSI, Tunisie</strong>,
+          et parallèlement inscrit en <strong>Master Data Science</strong>. Mon travail couvre l'ensemble
+          de la chaîne IA — de l'entraînement de modèles transformer au déploiement d'APIs en production
+          et d'applications mobiles.
+        </p>
+        <p class="hero-bio" data-en>
+          I am a Computer Science Engineering student specializing in AI at <strong>ENSI, Tunisia</strong>,
+          simultaneously pursuing a <strong>Master in Data Science</strong>. My work spans the full stack of
+          AI — from training transformer models to deploying production APIs and mobile apps.
+        </p>
+        <p class="hero-bio" data-fr>
+          Ce qui me distingue : une double expertise en <strong>ingénierie</strong> (je construis des systèmes
+          qui fonctionnent) et en <strong>recherche appliquée</strong> — notamment sur le <strong>TAL pour
+          les langues africaines</strong> sous-représentées dans les systèmes IA modernes.
+          Originaire du <strong>Burkina Faso</strong>. Je construis pour un impact global.
+        </p>
+        <p class="hero-bio" data-en>
+          What sets me apart is a dual focus: <strong>engineering execution</strong> (I build things that work)
+          and <strong>applied research</strong> — working on NLP for African languages largely absent
+          from modern AI systems. From <strong>Burkina Faso</strong>. Building for global impact.
+        </p>
+        <div class="hero-tags">
+          <span class="tag accent">IA Appliquée / Applied AI</span>
+          <span class="tag">NLP Research</span>
+          <span class="tag">Python · PyTorch</span>
+          <span class="tag">Transformers</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">React Native</span>
+          <span class="tag accent" data-fr>Langues Africaines</span>
+          <span class="tag accent" data-en>African Languages</span>
+          <span class="tag">Low-resource NLP</span>
+        </div>
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary" data-fr>Voir les projets</a>
+          <a href="#projects" class="btn-primary" data-en>View Projects</a>
+          <a href="#research" class="btn-outline" data-fr>Recherche</a>
+          <a href="#research" class="btn-outline" data-en>Research Work</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stat Strip -->
+    <div class="stat-strip">
+      <div class="stat-item">
+        <div class="stat-num">6+</div>
+        <div class="stat-label" data-fr>Projets en production</div>
+        <div class="stat-label" data-en>Production Projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label" data-fr>Langues africaines étudiées</div>
+        <div class="stat-label" data-en>African Languages Researched</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3×</div>
+        <div class="stat-label" data-fr>Prix Présidentiels d'Excellence</div>
+        <div class="stat-label" data-en>Presidential Excellence Awards</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2</div>
+        <div class="stat-label" data-fr>Diplômes d'ingénierie</div>
+        <div class="stat-label" data-en>Engineering Degrees</div>
+      </div>
+    </div>
+
+    <!-- About Detail -->
+    <div class="section-eyebrow" data-fr>À propos</div>
+    <div class="section-eyebrow" data-en>About</div>
+    <h2 class="section-title" data-fr>Ingénierie IA. <em style="font-style:italic">Recherche inclusive.</em></h2>
+    <h2 class="section-title" data-en>Engineering AI. <em style="font-style:italic">Researching inclusion.</em></h2>
+    <div class="about-detail-grid">
+      <div>
+        <p class="hero-bio" data-fr>
+          J'ai grandi en parlant le <strong>Mooré et le Gourmantchéma</strong>. Ma recherche n'est pas
+          seulement technique — elle est personnelle. Je construis l'infrastructure pour que des langues
+          comme les miennes existent à l'ère de l'IA.
+        </p>
+        <p class="hero-bio" data-en>
+          I grew up speaking <strong>Mooré and Gourmantchéma</strong>. My research is not just technical —
+          it's personal. I'm building the infrastructure for languages like mine to exist in the age of AI.
+        </p>
+        <div class="hero-tags" style="margin-top:1.5rem">
+          <span class="tag" data-fr>Ingénierie IA</span><span class="tag" data-en>AI Engineering</span>
+          <span class="tag" data-fr>Recherche Appliquée</span><span class="tag" data-en>Applied Research</span>
+          <span class="tag" data-fr>Vision Produit</span><span class="tag" data-en>Product Thinking</span>
+          <span class="tag" data-fr>IA Responsable</span><span class="tag" data-en>Responsible AI</span>
+          <span class="tag">African NLP</span>
+        </div>
+      </div>
+      <div class="about-facts">
+        <div class="fact-item">
+          <div class="fact-dot"></div>
           <div>
-            <div class="aci-label">Currently</div>
-            <div class="aci-val">AI Engineering Graduate · ENSI, Tunisia</div>
+            <div class="fact-label" data-fr>Actuellement</div>
+            <div class="fact-label" data-en>Currently</div>
+            <div class="fact-val" data-fr>Étudiant Ingénieur IA · ENSI, Tunisie</div>
+            <div class="fact-val" data-en>AI Engineering Graduate · ENSI, Tunisia</div>
           </div>
         </div>
-        <div class="about-card-item">
-          <div class="aci-dot"></div>
+        <div class="fact-item">
+          <div class="fact-dot"></div>
           <div>
-            <div class="aci-label">Research Focus</div>
-            <div class="aci-val">Low-resource NLP · Mooré, Fulfuldé, Dioula, Gulmancema</div>
+            <div class="fact-label" data-fr>Axe de recherche</div>
+            <div class="fact-label" data-en>Research Focus</div>
+            <div class="fact-val">Low-resource NLP · Mooré, Fulfuldé, Dioula, Gulmancema</div>
           </div>
         </div>
-        <div class="about-card-item">
-          <div class="aci-dot"></div>
+        <div class="fact-item">
+          <div class="fact-dot"></div>
           <div>
-            <div class="aci-label">Host Lab</div>
-            <div class="aci-val">CITADEL Research Center, Ouagadougou</div>
+            <div class="fact-label" data-fr>Laboratoire</div>
+            <div class="fact-label" data-en>Host Lab</div>
+            <div class="fact-val">CITADEL Research Center, Ouagadougou</div>
           </div>
         </div>
-        <div class="about-card-item">
-          <div class="aci-dot"></div>
+        <div class="fact-item">
+          <div class="fact-dot"></div>
           <div>
-            <div class="aci-label">Initiative</div>
-            <div class="aci-val">PUKRI AI SYSTEMS — AI Solutions Lab</div>
+            <div class="fact-label" data-fr>Initiative</div>
+            <div class="fact-label" data-en>Initiative</div>
+            <div class="fact-val">PUKRI AI SYSTEMS — AI Solutions Lab</div>
           </div>
         </div>
-        <div class="about-card-item">
-          <div class="aci-dot"></div>
+        <div class="fact-item">
+          <div class="fact-dot"></div>
           <div>
-            <div class="aci-label">Languages</div>
-            <div class="aci-val">French · English · Mooré · Gourmantchéma</div>
+            <div class="fact-label" data-fr>Langues parlées</div>
+            <div class="fact-label" data-en>Languages</div>
+            <div class="fact-val">Français · English · Mooré · Gourmantchéma</div>
           </div>
         </div>
-        <div class="about-card-item">
-          <div class="aci-dot"></div>
+        <div class="fact-item">
+          <div class="fact-dot"></div>
           <div>
-            <div class="aci-label">Open to</div>
-            <div class="aci-val">AI roles · Research labs · Remote · International</div>
+            <div class="fact-label" data-fr>Ouvert à</div>
+            <div class="fact-label" data-en>Open to</div>
+            <div class="fact-val" data-fr>Postes IA · Labos de recherche · Remote · International</div>
+            <div class="fact-val" data-en>AI roles · Research labs · Remote · International</div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- RESEARCH -->
-<section id="research" style="background:var(--bg3)">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">Research</div>
-      <h2 class="section-title">Building AI for the languages<br>the world forgot.</h2>
-      <p class="section-sub">Applied NLP research on African low-resource languages — creating the datasets, models, and evaluation frameworks that don't yet exist.</p>
-    </div>
+  <!-- ── RESEARCH ── -->
+  <section id="research" class="section">
+    <div class="section-eyebrow" data-fr>Recherche</div>
+    <div class="section-eyebrow" data-en>Research</div>
+    <h2 class="section-title" data-fr>Construire l'IA pour les<br>langues que le monde a oubliées.</h2>
+    <h2 class="section-title" data-en>Building AI for the languages<br>the world forgot.</h2>
+    <p class="section-sub" data-fr>Recherche en TAL appliqué sur les langues africaines à faibles ressources — création de jeux de données, modèles et cadres d'évaluation qui n'existent pas encore.</p>
+    <p class="section-sub" data-en>Applied NLP research on African low-resource languages — creating the datasets, models, and evaluation frameworks that don't yet exist.</p>
 
-    <div class="research-block">
-      <div class="research-title">Cross-lingual NLP for African Low-Resource Languages</div>
+    <div class="research-main">
+      <div class="research-type" data-fr>PFE · Labo CITADEL · NLP · Phonémique · Transfert d'apprentissage</div>
+      <div class="research-type" data-en>PFE · CITADEL Lab · NLP · Phonemics · Transfer Learning</div>
+      <div class="research-title" data-fr>TAL Multilingue pour les Langues Africaines à Faibles Ressources</div>
+      <div class="research-title" data-en>Cross-lingual NLP for African Low-Resource Languages</div>
       <div class="research-meta">
-        <span class="rmeta">PFE · CITADEL Lab</span>
-        <span class="rmeta">2025–2026</span>
-        <span class="rmeta">NLP · Phonemics · Transfer Learning</span>
+        <span class="rmeta">📍 CITADEL Lab</span>
+        <span class="rmeta">📅 2025–2026</span>
       </div>
-      <div class="research-desc">
+      <p class="research-desc" data-fr>
+        Développement d'une infrastructure TAL pour le Mooré, le Fulfuldé, le Dioula et le Gulmancema —
+        quatre langues parlées par des millions de personnes en Afrique de l'Ouest, mais entièrement absentes
+        des benchmarks NLP existants. Le travail inclut la construction de jeux de données graphème-phonème (G2P),
+        des expériences de transfert multilingue avec XLM-R et AfroXLM-R, et des stratégies de représentation
+        phonémique basées sur l'API. Une revue systématique PRISMA de 29 articles a confirmé que ces langues
+        ont zéro couverture dans la recherche NLP phonémique multilingue.
+      </p>
+      <p class="research-desc" data-en>
         Developing NLP infrastructure for Mooré, Fulfuldé, Dioula, and Gulmancema — four languages
         spoken by millions in West Africa yet entirely absent from existing NLP benchmarks.
         Work includes grapheme-to-phoneme (G2P) dataset construction, cross-lingual transfer
         experiments using XLM-R and AfroXLM-R, and IPA-based phonemic representation strategies.
         A systematic PRISMA literature review of 29 articles confirmed these languages have zero
         coverage in cross-lingual phonemic NLP research.
-      </div>
-      <div style="margin-bottom:0.75rem">
-        <div style="font-family:var(--mono);font-size:0.7rem;color:var(--muted);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.08em">Languages</div>
-        <div class="research-langs">
-          <span class="lang-chip">Mooré</span>
-          <span class="lang-chip">Fulfuldé</span>
-          <span class="lang-chip">Dioula</span>
-          <span class="lang-chip">Gulmancema</span>
-          <span class="lang-chip">Bambara</span>
+      </p>
+      <div class="chip-group">
+        <div class="chip-label" data-fr>Langues</div>
+        <div class="chip-label" data-en>Languages</div>
+        <div class="chips">
+          <span class="chip chip-teal">Mooré</span>
+          <span class="chip chip-teal">Fulfuldé</span>
+          <span class="chip chip-teal">Dioula</span>
+          <span class="chip chip-teal">Gulmancema</span>
+          <span class="chip chip-teal">Bambara</span>
         </div>
       </div>
-      <div>
-        <div style="font-family:var(--mono);font-size:0.7rem;color:var(--muted);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.08em">Models & Frameworks</div>
-        <div class="research-models">
-          <span class="model-chip">XLM-R</span>
-          <span class="model-chip">AfroXLM-R</span>
-          <span class="model-chip">XPhoneBERT</span>
-          <span class="model-chip">Epitran</span>
-          <span class="model-chip">CharsiuG2P</span>
-          <span class="model-chip">HuggingFace</span>
+      <div class="chip-group">
+        <div class="chip-label" data-fr>Modèles & Frameworks</div>
+        <div class="chip-label" data-en>Models & Frameworks</div>
+        <div class="chips">
+          <span class="chip chip-purple">XLM-R</span>
+          <span class="chip chip-purple">AfroXLM-R</span>
+          <span class="chip chip-purple">XPhoneBERT</span>
+          <span class="chip chip-purple">Epitran</span>
+          <span class="chip chip-purple">CharsiuG2P</span>
+          <span class="chip chip-purple">HuggingFace</span>
         </div>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
-      <div class="research-block" style="margin-bottom:0">
-        <div style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem">Dataset Engineering</div>
-        <div class="research-title" style="font-size:1.2rem">Gulmancema–French Parallel Corpus</div>
-        <div class="research-desc" style="margin-bottom:0;font-size:0.9rem">
-          First-of-its-kind parallel dataset for Gulmancema–French translation.
-          8-field schema, reproducible 80/10/10 splits, sourced from Picavet 2020 dictionary.
-          Targeting AfricaNLP Workshop, LREC-COLING and HuggingFace publication.
-        </div>
+    <div class="research-sub-grid">
+      <div class="research-sub">
+        <div class="rsub-type teal" data-fr>Ingénierie de Données</div>
+        <div class="rsub-type teal" data-en>Dataset Engineering</div>
+        <div class="rsub-title" data-fr>Corpus Parallèle Gulmancema–Français</div>
+        <div class="rsub-title" data-en>Gulmancema–French Parallel Corpus</div>
+        <p class="rsub-desc" data-fr>Premier jeu de données parallèle pour la traduction Gulmancema–Français. Schéma à 8 champs, splits 80/10/10, issu du dictionnaire Picavet 2020. Soumission ciblée AfricaNLP, LREC-COLING et HuggingFace.</p>
+        <p class="rsub-desc" data-en>First-of-its-kind parallel dataset for Gulmancema–French translation. 8-field schema, reproducible 80/10/10 splits, sourced from Picavet 2020 dictionary. Targeting AfricaNLP Workshop, LREC-COLING and HuggingFace publication.</p>
       </div>
-      <div class="research-block" style="margin-bottom:0">
-        <div style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem">Literature Review</div>
-        <div class="research-title" style="font-size:1.2rem">PRISMA Systematic Review</div>
-        <div class="research-desc" style="margin-bottom:0;font-size:0.9rem">
-          Full PRISMA review of 29 papers on cross-lingual phonemic NLP.
-          Key finding: XLM-R and mBERT dominate; zero-shot is most common approach;
-          target languages entirely absent — directly justifying this research.
-        </div>
+      <div class="research-sub">
+        <div class="rsub-type amber" data-fr>Revue de Littérature</div>
+        <div class="rsub-type amber" data-en>Literature Review</div>
+        <div class="rsub-title" data-fr>Revue Systématique PRISMA</div>
+        <div class="rsub-title" data-en>PRISMA Systematic Review</div>
+        <p class="rsub-desc" data-fr>Revue PRISMA complète de 29 articles sur le NLP phonémique multilingue. Résultat clé : XLM-R et mBERT dominent ; le zero-shot est l'approche la plus courante ; les langues ciblées sont entièrement absentes.</p>
+        <p class="rsub-desc" data-en>Full PRISMA review of 29 papers on cross-lingual phonemic NLP. Key finding: XLM-R and mBERT dominate; zero-shot is most common approach; target languages entirely absent — directly justifying this research.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">Projects</div>
-      <h2 class="section-title">Systems built to ship.</h2>
-      <p class="section-sub">Real-world products and AI systems — designed, engineered, and deployed.</p>
-    </div>
+  <!-- ── PROJECTS ── -->
+  <section id="projects" class="section">
+    <div class="section-eyebrow" data-fr>Projets</div>
+    <div class="section-eyebrow" data-en>Projects</div>
+    <h2 class="section-title" data-fr>Systèmes construits pour être déployés.</h2>
+    <h2 class="section-title" data-en>Systems built to ship.</h2>
+    <p class="section-sub" data-fr>Produits réels et systèmes IA — conçus, développés et déployés.</p>
+    <p class="section-sub" data-en>Real-world products and AI systems — designed, engineered, and deployed.</p>
     <div class="projects-grid">
 
       <div class="project-card featured">
         <div class="project-arrow">↗</div>
-        <div class="project-tag">AI Platform · Career Tech</div>
+        <div class="project-type" data-fr>Plateforme IA · CareerTech</div>
+        <div class="project-type" data-en>AI Platform · Career Tech</div>
         <div class="project-title">Talent-Ya</div>
-        <div class="project-impact">AI-powered employability platform for West African students</div>
-        <div class="project-desc">
-          A full-stack AI career platform helping students and graduates structure their job search,
-          improve applications with AI feedback, and access curated opportunities. Built with a focus
-          on digital inclusion and AI accessibility in contexts where career coaching infrastructure
-          is underdeveloped. Features conversational AI guidance, document analysis, and structured
-          career development workflows.
-        </div>
+        <div class="project-impact">↗ <span data-fr>Plateforme d'employabilité IA pour étudiants ouest-africains</span><span data-en>AI-powered employability platform for West African students</span></div>
+        <p class="project-desc" data-fr>Plateforme IA full-stack aidant étudiants et diplômés à structurer leur recherche d'emploi, améliorer leurs candidatures via des retours IA, et accéder à des opportunités ciblées. Construite pour l'inclusion numérique. Fonctionnalités : guidage IA conversationnel, analyse de documents, workflows de développement de carrière.</p>
+        <p class="project-desc" data-en>A full-stack AI career platform helping students and graduates structure their job search, improve applications with AI feedback, and access curated opportunities. Built with a focus on digital inclusion. Features conversational AI guidance, document analysis, and structured career development workflows.</p>
         <div class="project-stack">
-          <span class="stack-badge">Python</span>
-          <span class="stack-badge">FastAPI</span>
-          <span class="stack-badge">React</span>
-          <span class="stack-badge">NLP</span>
-          <span class="stack-badge">Agentic AI</span>
-          <span class="stack-badge">LLM Integration</span>
+          <span class="stack-badge">Python</span><span class="stack-badge">FastAPI</span>
+          <span class="stack-badge">React</span><span class="stack-badge">NLP</span>
+          <span class="stack-badge">Agentic AI</span><span class="stack-badge">LLM Integration</span>
         </div>
       </div>
 
       <div class="project-card">
         <div class="project-arrow">↗</div>
-        <div class="project-tag">Mobile App · PropTech</div>
+        <div class="project-type" data-fr>App Mobile · PropTech</div>
+        <div class="project-type" data-en>Mobile App · PropTech</div>
         <div class="project-title">BailExpress</div>
-        <div class="project-desc">
-          Real estate and rental management mobile application built for the Burkina Faso market.
-          Production-ready with Supabase Row Level Security, full auth flows, and backend integrations.
-          Deployed via Expo EAS.
-        </div>
+        <p class="project-desc" data-fr>Application mobile de gestion immobilière et locative pour le marché burkinabè. Production avec Supabase Row Level Security, flux d'authentification complets et intégrations backend. Déployée via Expo EAS.</p>
+        <p class="project-desc" data-en>Real estate and rental management mobile application built for the Burkina Faso market. Production-ready with Supabase Row Level Security, full auth flows, and backend integrations. Deployed via Expo EAS.</p>
         <div class="project-stack">
-          <span class="stack-badge">React Native</span>
-          <span class="stack-badge">Expo</span>
-          <span class="stack-badge">Supabase</span>
-          <span class="stack-badge">RLS</span>
-          <span class="stack-badge">TypeScript</span>
+          <span class="stack-badge">React Native</span><span class="stack-badge">Expo</span>
+          <span class="stack-badge">Supabase</span><span class="stack-badge">TypeScript</span>
         </div>
       </div>
 
       <div class="project-card">
         <div class="project-arrow">↗</div>
-        <div class="project-tag">AI Solutions Lab · B2B</div>
+        <div class="project-type" data-fr>Lab Solutions IA · B2B</div>
+        <div class="project-type" data-en>AI Solutions Lab · B2B</div>
         <div class="project-title">PUKRI AI SYSTEMS</div>
-        <div class="project-desc">
-          AI solutions initiative delivering intelligent assistants, workflow automation,
-          and WhatsApp AI for SMEs in West Africa. End-to-end: strategy, engineering, deployment.
-        </div>
+        <p class="project-desc" data-fr>Initiative de solutions IA livrant des assistants intelligents, de l'automatisation de workflows et de l'IA WhatsApp pour les PME d'Afrique de l'Ouest. De bout en bout : stratégie, ingénierie, déploiement.</p>
+        <p class="project-desc" data-en>AI solutions initiative delivering intelligent assistants, workflow automation, and WhatsApp AI for SMEs in West Africa. End-to-end: strategy, engineering, deployment.</p>
         <div class="project-stack">
-          <span class="stack-badge">n8n</span>
-          <span class="stack-badge">Make</span>
-          <span class="stack-badge">WhatsApp API</span>
-          <span class="stack-badge">FastAPI</span>
-          <span class="stack-badge">Agentic AI</span>
+          <span class="stack-badge">n8n</span><span class="stack-badge">Make</span>
+          <span class="stack-badge">WhatsApp API</span><span class="stack-badge">FastAPI</span>
         </div>
       </div>
 
       <div class="project-card">
         <div class="project-arrow">↗</div>
-        <div class="project-tag">AI System · Sustainability</div>
+        <div class="project-type" data-fr>Système IA · Développement Durable</div>
+        <div class="project-type" data-en>AI System · Sustainability</div>
         <div class="project-title">Eco Traffic Guidance</div>
-        <div class="project-desc">
-          Predictive AI system for eco-friendly urban traffic routing. PyTorch models
-          + FastAPI backend + MongoDB. Focus on sustainable mobility and intelligent routing.
-        </div>
+        <p class="project-desc" data-fr>Système IA prédictif pour le routage urbain écologique. Modèles PyTorch + backend FastAPI + MongoDB. Focus sur la mobilité durable et le routage intelligent.</p>
+        <p class="project-desc" data-en>Predictive AI system for eco-friendly urban traffic routing. PyTorch models + FastAPI backend + MongoDB. Focus on sustainable mobility and intelligent routing.</p>
         <div class="project-stack">
-          <span class="stack-badge">PyTorch</span>
-          <span class="stack-badge">Scikit-learn</span>
-          <span class="stack-badge">FastAPI</span>
-          <span class="stack-badge">MongoDB</span>
+          <span class="stack-badge">PyTorch</span><span class="stack-badge">Scikit-learn</span>
+          <span class="stack-badge">FastAPI</span><span class="stack-badge">MongoDB</span>
         </div>
       </div>
 
       <div class="project-card">
         <div class="project-arrow">↗</div>
-        <div class="project-tag">Data Engineering · AgTech</div>
+        <div class="project-type" data-fr>Data Engineering · AgTech</div>
+        <div class="project-type" data-en>Data Engineering · AgTech</div>
         <div class="project-title">Smart Agriculture Pipeline</div>
-        <div class="project-desc">
-          Real-time agricultural monitoring pipeline using distributed stream processing.
-          Kafka ingestion, Spark transformations, MongoDB storage. Built for large-scale
-          sensor data from agricultural IoT systems.
-        </div>
+        <p class="project-desc" data-fr>Pipeline de surveillance agricole en temps réel via traitement distribué de flux. Ingestion Kafka, transformations Spark, stockage MongoDB. Conçu pour les données IoT agricoles à grande échelle.</p>
+        <p class="project-desc" data-en>Real-time agricultural monitoring pipeline using distributed stream processing. Kafka ingestion, Spark transformations, MongoDB storage. Built for large-scale sensor data from agricultural IoT systems.</p>
         <div class="project-stack">
-          <span class="stack-badge">Kafka</span>
-          <span class="stack-badge">Spark</span>
-          <span class="stack-badge">MongoDB</span>
-          <span class="stack-badge">Python</span>
+          <span class="stack-badge">Kafka</span><span class="stack-badge">Spark</span>
+          <span class="stack-badge">MongoDB</span><span class="stack-badge">Python</span>
         </div>
       </div>
 
       <div class="project-card">
         <div class="project-arrow">↗</div>
-        <div class="project-tag">Full-Stack · Research Lab</div>
+        <div class="project-type" data-fr>Full-Stack · Labo de Recherche</div>
+        <div class="project-type" data-en>Full-Stack · Research Lab</div>
         <div class="project-title">LARIA Platform</div>
-        <div class="project-desc">
-          Full-stack web platform for an AI research laboratory — publications, members,
-          events, and scientific visibility. React + Node.js + MongoDB. Production deployed.
-        </div>
+        <p class="project-desc" data-fr>Plateforme web full-stack pour un laboratoire de recherche en IA — publications, membres, événements et visibilité scientifique. React + Node.js + MongoDB. Déployée en production.</p>
+        <p class="project-desc" data-en>Full-stack web platform for an AI research laboratory — publications, members, events, and scientific visibility. React + Node.js + MongoDB. Production deployed.</p>
         <div class="project-stack">
-          <span class="stack-badge">React.js</span>
-          <span class="stack-badge">Node.js</span>
-          <span class="stack-badge">MongoDB</span>
-          <span class="stack-badge">REST API</span>
+          <span class="stack-badge">React.js</span><span class="stack-badge">Node.js</span>
+          <span class="stack-badge">MongoDB</span><span class="stack-badge">REST API</span>
         </div>
       </div>
 
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SKILLS -->
-<section id="skills" class="skills-section">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">Capabilities</div>
-      <h2 class="section-title">Full-spectrum AI engineering.</h2>
-    </div>
+  <!-- ── SKILLS ── -->
+  <section id="skills" class="section">
+    <div class="section-eyebrow" data-fr>Compétences</div>
+    <div class="section-eyebrow" data-en>Capabilities</div>
+    <h2 class="section-title" data-fr>Ingénierie IA à spectre complet.</h2>
+    <h2 class="section-title" data-en>Full-spectrum AI engineering.</h2>
     <div class="skills-grid">
       <div class="skill-group">
         <div class="sg-title">AI / ML</div>
         <ul class="sg-items">
           <li>PyTorch · TensorFlow</li>
           <li>Transformers (HF)</li>
-          <li>NLP · Computer Vision</li>
+          <li>NLP · Vision</li>
           <li>Scikit-learn</li>
           <li>Prompt Engineering</li>
           <li>Fine-tuning · RAG</li>
@@ -863,166 +882,191 @@ footer{
         </ul>
       </div>
       <div class="skill-group">
-        <div class="sg-title">Backend & APIs</div>
+        <div class="sg-title" data-fr>Backend & APIs</div>
+        <div class="sg-title" data-en>Backend & APIs</div>
         <ul class="sg-items">
           <li>FastAPI · Django</li>
           <li>Node.js · REST</li>
           <li>MongoDB · MySQL</li>
           <li>Supabase · RLS</li>
-          <li>Authentication</li>
           <li>Docker · CI/CD</li>
           <li>GitHub Actions</li>
         </ul>
       </div>
       <div class="skill-group">
-        <div class="sg-title">Frontend & Mobile</div>
+        <div class="sg-title" data-fr>Frontend & Mobile</div>
+        <div class="sg-title" data-en>Frontend & Mobile</div>
         <ul class="sg-items">
           <li>React.js · Next.js</li>
           <li>TypeScript</li>
           <li>React Native · Expo</li>
           <li>TailwindCSS</li>
           <li>EAS Build</li>
-          <li>API Integration</li>
         </ul>
       </div>
       <div class="skill-group">
-        <div class="sg-title">Data & Automation</div>
+        <div class="sg-title" data-fr>Données & Automatisation</div>
+        <div class="sg-title" data-en>Data & Automation</div>
         <ul class="sg-items">
           <li>Kafka · Spark</li>
           <li>Data Pipelines</li>
           <li>n8n · Make</li>
-          <li>Workflow Automation</li>
           <li>Stream Processing</li>
           <li>SQL · Data Mining</li>
           <li>Evaluation Protocols</li>
         </ul>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- TIMELINE -->
-<section id="background" style="background:var(--bg3)">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">Background</div>
-      <h2 class="section-title">The path here.</h2>
-    </div>
+  <!-- ── BACKGROUND ── -->
+  <section id="background" class="section">
+    <div class="section-eyebrow" data-fr>Parcours</div>
+    <div class="section-eyebrow" data-en>Background</div>
+    <h2 class="section-title" data-fr>Le chemin parcouru.</h2>
+    <h2 class="section-title" data-en>The path here.</h2>
     <div class="timeline">
       <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-year">2025–2026</div>
-        <div class="tl-title">Master 2 Data Science — Computer Vision</div>
-        <div class="tl-place">ENSI, Université de la Manouba, Tunisia</div>
-        <div class="tl-desc">Advanced statistical modelling, deep learning, computer vision, and AI systems research.</div>
+        <div class="tl-title" data-fr>Master 2 Data Science — Vision par Ordinateur</div>
+        <div class="tl-title" data-en>Master 2 Data Science — Computer Vision</div>
+        <div class="tl-place" data-fr>ENSI, Université de la Manouba, Tunisie</div>
+        <div class="tl-place" data-en>ENSI, Université de la Manouba, Tunisia</div>
+        <div class="tl-desc" data-fr>Modélisation statistique avancée, apprentissage profond, vision par ordinateur et recherche en systèmes IA.</div>
+        <div class="tl-desc" data-en>Advanced statistical modelling, deep learning, computer vision, and AI systems research.</div>
       </div>
       <div class="tl-item">
         <div class="tl-dot"></div>
-        <div class="tl-year">2023–present</div>
-        <div class="tl-title">Engineering in Computer Science — AI Specialization</div>
-        <div class="tl-place">ENSI, Université de la Manouba, Tunisia</div>
-        <div class="tl-desc">Algorithmics, machine learning, deep learning, optimization, intelligent systems. Research track via CITADEL program.</div>
+        <div class="tl-year">2023–présent</div>
+        <div class="tl-title" data-fr>Ingénierie Informatique — Spécialisation IA</div>
+        <div class="tl-title" data-en>Engineering in Computer Science — AI Specialization</div>
+        <div class="tl-place" data-fr>ENSI, Université de la Manouba, Tunisie</div>
+        <div class="tl-place" data-en>ENSI, Université de la Manouba, Tunisia</div>
+        <div class="tl-desc" data-fr>Algorithmique, machine learning, deep learning, optimisation, systèmes intelligents. Parcours recherche via le programme CITADEL.</div>
+        <div class="tl-desc" data-en>Algorithmics, machine learning, deep learning, optimization, intelligent systems. Research track via CITADEL program.</div>
       </div>
       <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-year">2021–2023</div>
-        <div class="tl-title">Classes Préparatoires — Mathematics & Physics</div>
-        <div class="tl-place">IPEIT, Tunisia</div>
-        <div class="tl-desc">Rigorous foundation in analysis, algebra, probability, and theoretical physics.</div>
+        <div class="tl-title" data-fr>Classes Préparatoires — Mathématiques & Physique</div>
+        <div class="tl-title" data-en>Classes Préparatoires — Mathematics & Physics</div>
+        <div class="tl-place" data-fr>IPEIT, Tunisie</div>
+        <div class="tl-place" data-en>IPEIT, Tunisia</div>
+        <div class="tl-desc" data-fr>Solide formation en analyse, algèbre, probabilités et physique théorique.</div>
+        <div class="tl-desc" data-en>Rigorous foundation in analysis, algebra, probability, and theoretical physics.</div>
       </div>
       <div class="tl-item">
-        <div class="tl-dot" style="background:var(--amber)"></div>
+        <div class="tl-dot gold"></div>
         <div class="tl-year">2021</div>
-        <div class="tl-title">Baccalaureate — National Valedictorian</div>
-        <div class="tl-place">Collège Horizon International, Burkina Faso</div>
-        <div class="tl-desc">Top-ranked nationally across all series. Presidential Excellence Award recipient. Burkina Faso–Tunisia excellence scholarship.</div>
+        <div class="tl-title" data-fr>Baccalauréat — Major National</div>
+        <div class="tl-title" data-en>Baccalaureate — National Valedictorian</div>
+        <div class="tl-place" data-fr>Collège Horizon International, Burkina Faso</div>
+        <div class="tl-place" data-en>Collège Horizon International, Burkina Faso</div>
+        <div class="tl-desc" data-fr>1er au classement national toutes séries confondues. Lauréat du Prix Présidentiel d'Excellence. Bourse d'excellence Burkina Faso–Tunisie.</div>
+        <div class="tl-desc" data-en>Top-ranked nationally across all series. Presidential Excellence Award recipient. Burkina Faso–Tunisia excellence scholarship.</div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- AWARDS -->
-<section>
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">Recognition</div>
-      <h2 class="section-title">Distinctions.</h2>
-    </div>
+  <!-- ── AWARDS ── -->
+  <section id="awards" class="section">
+    <div class="section-eyebrow" data-fr>Distinctions</div>
+    <div class="section-eyebrow" data-en>Recognition</div>
+    <h2 class="section-title" data-fr>Récompenses.</h2>
+    <h2 class="section-title" data-en>Distinctions.</h2>
     <div class="awards-grid">
       <div class="award-card">
         <div class="award-icon">🏆</div>
-        <div class="award-title">CITADEL Master of Excellence — AI Track</div>
+        <div class="award-title" data-fr>CITADEL Master of Excellence — Filière IA</div>
+        <div class="award-title" data-en>CITADEL Master of Excellence — AI Track</div>
         <div class="award-source">CITADEL Research Center · Burkina Faso</div>
         <div class="award-year">2026</div>
       </div>
       <div class="award-card">
         <div class="award-icon">🥇</div>
-        <div class="award-title">National Valedictorian — Baccalaureate</div>
-        <div class="award-source">Burkina Faso Ministry of Education</div>
+        <div class="award-title" data-fr>Major National — Baccalauréat</div>
+        <div class="award-title" data-en>National Valedictorian — Baccalaureate</div>
+        <div class="award-source" data-fr>Ministère de l'Éducation du Burkina Faso</div>
+        <div class="award-source" data-en>Burkina Faso Ministry of Education</div>
         <div class="award-year">2021</div>
       </div>
       <div class="award-card">
         <div class="award-icon">🎖️</div>
-        <div class="award-title">Presidential Excellence Award (×3)</div>
-        <div class="award-source">President of Burkina Faso</div>
+        <div class="award-title" data-fr>Prix Présidentiel d'Excellence (×3)</div>
+        <div class="award-title" data-en>Presidential Excellence Award (×3)</div>
+        <div class="award-source" data-fr>Président du Burkina Faso</div>
+        <div class="award-source" data-en>President of Burkina Faso</div>
         <div class="award-year">2018 · 2021</div>
       </div>
       <div class="award-card">
         <div class="award-icon">✈️</div>
-        <div class="award-title">Burkina Faso–Tunisia Excellence Scholarship</div>
-        <div class="award-source">Inter-governmental excellence program</div>
-        <div class="award-year">2021–present</div>
+        <div class="award-title" data-fr>Bourse d'Excellence Burkina Faso–Tunisie</div>
+        <div class="award-title" data-en>Burkina Faso–Tunisia Excellence Scholarship</div>
+        <div class="award-source" data-fr>Programme d'excellence intergouvernemental</div>
+        <div class="award-source" data-en>Inter-governmental excellence program</div>
+        <div class="award-year">2021–présent</div>
       </div>
       <div class="award-card">
         <div class="award-icon">📜</div>
-        <div class="award-title">Machine Learning Specialization</div>
+        <div class="award-title" data-fr>Spécialisation Machine Learning</div>
+        <div class="award-title" data-en>Machine Learning Specialization</div>
         <div class="award-source">DeepLearning.AI · Andrew Ng</div>
-        <div class="award-year">Certified</div>
+        <div class="award-year" data-fr>Certifié</div>
+        <div class="award-year" data-en>Certified</div>
       </div>
       <div class="award-card">
         <div class="award-icon">⚡</div>
-        <div class="award-title">NVIDIA Deep Learning Institute</div>
+        <div class="award-title" data-fr>NVIDIA Deep Learning Institute</div>
+        <div class="award-title" data-en>NVIDIA Deep Learning Institute</div>
         <div class="award-source">NVIDIA DLI · Multiple Certifications</div>
-        <div class="award-year">Certified</div>
+        <div class="award-year" data-fr>Certifié</div>
+        <div class="award-year" data-en>Certified</div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact" class="contact-section">
-  <div class="section-inner">
-    <div class="contact-inner">
-      <div class="section-eyebrow" style="justify-content:center">Contact</div>
-      <h2 class="contact-title">Let's build something<br><em style="font-family:var(--serif);font-style:italic">that matters.</em></h2>
-      <p class="contact-desc">
-        Available for AI engineering roles, research collaborations, applied AI consulting,
-        and remote opportunities. I work with teams who care about real-world impact.
-      </p>
-      <div class="contact-links">
-        <a href="mailto:urie.thiombiano@ensi-uma.tn" class="clink">✉ Email</a>
-        <a href="https://wa.me/21651816269" class="clink" target="_blank" rel="noopener">💬 WhatsApp</a>
-        <a href="https://www.linkedin.com/in/urie-thiombiano-abab3928a/" class="clink" target="_blank" rel="noopener">in LinkedIn</a>
-        <a href="https://github.com/UrieThiombiano" class="clink" target="_blank" rel="noopener">⌥ GitHub</a>
-      </div>
-      <div style="margin-top:2rem;font-family:var(--mono);font-size:0.75rem;color:var(--muted);display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap">
-        <span>📧 urie.thiombiano@ensi-uma.tn</span>
-        <span>📱 +226 75 85 07 12</span>
-        <span>💬 WhatsApp +216 51 81 62 69</span>
-      </div>
+  <!-- ── CONTACT ── -->
+  <div id="contact" class="contact-section">
+    <div class="section-eyebrow" style="justify-content:center" data-fr>Contact</div>
+    <div class="section-eyebrow" style="justify-content:center" data-en>Contact</div>
+    <h2 class="contact-title" data-fr>Construisons quelque chose<br><em style="font-style:italic">qui compte.</em></h2>
+    <h2 class="contact-title" data-en>Let's build something<br><em style="font-style:italic">that matters.</em></h2>
+    <p class="contact-desc" data-fr>Disponible pour des postes en ingénierie IA, collaborations de recherche, conseil en IA appliquée et opportunités à distance. Je travaille avec des équipes soucieuses d'un impact réel.</p>
+    <p class="contact-desc" data-en>Available for AI engineering roles, research collaborations, applied AI consulting, and remote opportunities. I work with teams who care about real-world impact.</p>
+    <div class="contact-links">
+      <a href="mailto:urie.thiombiano@ensi-uma.tn" class="clink">✉ Email</a>
+      <a href="https://wa.me/21651816269" class="clink" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a href="https://www.linkedin.com/in/urie-thiombiano-abab3928a/" class="clink" target="_blank" rel="noopener">in LinkedIn</a>
+      <a href="https://github.com/UrieThiombiano" class="clink" target="_blank" rel="noopener">⌥ GitHub</a>
+    </div>
+    <div class="contact-info">
+      <span>📧 urie.thiombiano@ensi-uma.tn</span>
+      <span>📱 +226 75 85 07 12</span>
+      <span>💬 WhatsApp +216 51 81 62 69</span>
     </div>
   </div>
-</section>
+
+</div><!-- end main-layout -->
 
 <footer>
-  <span class="footer-note">© 2025 Urie Thiombiano — AI Engineer</span>
-  <div style="display:flex;gap:1.5rem;flex-wrap:wrap">
-    <a href="mailto:urie.thiombiano@ensi-uma.tn" class="footer-note" style="text-decoration:none;color:var(--muted)">Email</a>
-    <a href="https://github.com/UrieThiombiano" class="footer-note" style="text-decoration:none;color:var(--muted)" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/urie-thiombiano-abab3928a/" class="footer-note" style="text-decoration:none;color:var(--muted)" target="_blank">LinkedIn</a>
-    <a href="https://wa.me/21651816269" class="footer-note" style="text-decoration:none;color:var(--muted)" target="_blank">WhatsApp</a>
+  <span class="footer-note" data-fr>© 2025 Urie Thiombiano — Ingénieur IA</span>
+  <span class="footer-note" data-en>© 2025 Urie Thiombiano — AI Engineer</span>
+  <div class="footer-links">
+    <a href="mailto:urie.thiombiano@ensi-uma.tn">Email</a>
+    <a href="https://github.com/UrieThiombiano" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/urie-thiombiano-abab3928a/" target="_blank">LinkedIn</a>
+    <a href="https://wa.me/21651816269" target="_blank">WhatsApp</a>
   </div>
 </footer>
 
+<script>
+function setLang(lang) {
+  document.body.className = lang;
+  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+}
+</script>
 </body>
 </html>
